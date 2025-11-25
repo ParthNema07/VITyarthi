@@ -1,0 +1,18 @@
+from app import db
+from datetime import datetime
+
+# Define the Task model (the database table)
+class Task(db.Model):
+    # Primary Key (unique identifier)
+    id = db.Column(db.Integer, primary_key=True)
+    # The main text of the task (required)
+    title = db.Column(db.String(100), nullable=False)
+    # Optional due date
+    due_date = db.Column(db.DateTime, nullable=True)
+    # Completion status (default is False/Incomplete)
+    is_complete = db.Column(db.Boolean, default=False)
+    # Timestamp for when the task was created
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def _repr_(self):
+        return f"<Task {self.id}: {self.title}>"
